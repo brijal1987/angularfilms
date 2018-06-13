@@ -1,0 +1,6 @@
+<div class="search-form-wrap">
+	<form name="search-form" #searchform>
+		<input type="text" class="form-control" name="query" required="" value="" [(ngModel)]="query">
+		<button type="submit" [disabled]="!query" [routerLink]="['/search', query]">Search</button>
+	</form>
+</div>

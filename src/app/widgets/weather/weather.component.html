@@ -1,0 +1,47 @@
+<ng-container [ngSwitch]="type">
+	<ng-container *ngSwitchCase="'mini'">
+	<div class="header-top">
+		<h2><img class="whe" src="assets/img/sun.png" alt="" />Weather</h2>
+		<ul>
+			<li><p>{{ today | date: 'EEEE, MMM d, y'}}</p></li>
+		</ul>
+		<div class="clear"> </div>
+	</div>
+	<div class="header-bottom">
+		<div class="header-bottom1" *ngFor="let location of locations">
+			<div class="header-head">
+				<h4 [routerLink]="['weather', location.woeid]">{{ location.title }}</h4>
+				<img [src]="'https://www.metaweather.com/static/img/weather/'+location.consolidated_weather[0].weather_state_abbr+'.svg'" alt="" />
+				<h6>{{ Math.round(location.consolidated_weather[0].the_temp) }}°</h6>
+				<div class="bottom-head">
+					<p>Min: {{ Math.round(location.consolidated_weather[0].min_temp) }}°, Max: {{ Math.round(location.consolidated_weather[0].max_temp) }}°</p>
+				</div>
+			</div>
+		</div>
+		<div class="clear"> </div>
+	</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'detail'">
+	<div class="header-top">
+		<h2><img class="whe" src="assets/img/sun.png" alt="" />Weather</h2>
+		<ul>
+			<li><p *ngIf="locations && locations[0] && locations[0].consolidated_weather">{{ locations[0].title }}</p></li>
+		</ul>
+		<div class="clear"> </div>
+	</div>
+	<div class="header-bottom" *ngIf="locations && locations[0] && locations[0].consolidated_weather">
+		<div class="header-bottom1" *ngFor="let weather of locations[0].consolidated_weather">
+			<div class="header-head">
+				<h4>{{ weather.applicable_date | date: 'EEEE, MMM d, y' }}</h4>
+				<img [src]="'https://www.metaweather.com/static/img/weather/'+weather.weather_state_abbr+'.svg'" alt="" />
+				<h6>{{ Math.round(weather.the_temp) }}°</h6>
+				<div class="bottom-head">
+					<p>Min: {{ Math.round(weather.min_temp) }}°, Max: {{ Math.round(weather.max_temp) }}°</p>
+				</div>
+			</div>
+		</div>
+		<div class="clear"> </div>
+	</div>
+	</ng-container>
+</ng-container>

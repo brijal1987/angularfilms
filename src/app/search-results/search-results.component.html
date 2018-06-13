@@ -1,0 +1,7 @@
+<div class="search-results" *ngIf="data.length">
+	<weather [locations]="data" type="detail"></weather>
+</div>
+<p *ngIf="!data.length && mode">Loading...</p>
+<p *ngIf="!data.length && !mode" class="no-results">
+	No results were found. Try changing the keyword!
+</p>
